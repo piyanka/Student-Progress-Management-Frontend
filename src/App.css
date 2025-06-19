@@ -1,38 +1,363 @@
-.App {
+/* ================= Header ================= */
+.header {
+  text-align: center;
+  margin-left: 123px;
+}
+
+/* ================= NavBar ================= */
+.nav-bar{
+  position:fixed;
+  z-index: 1000;
+  width: 100%;
+  top:0;
+}
+.nav-ul {
+  padding: 5px;
+  margin: 0px;
+  background-color: rgb(119, 170, 233);
+}
+
+.nav-ul li {
+  display: inline-block;
+  padding: 10px;
+}
+
+.nav-right {
+  text-align: right;
+  
+}
+
+.nav-ul li a {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+
+.logo-ul {
+  width: 46px;
+  float: left;
+  border-radius: 79%;
+  margin-top: 4px;
+  margin-left: 7px;
+}
+
+/* ================= Search Bar ================= */
+.search-ul {
+  width: 490px;
+  margin: 23px;
+  padding: 13px;
+  border: 2px solid rgb(119, 170, 233);
+}
+
+/* ================= Forms (Login/Signup/Add) ================= */
+.register-ul,
+.login-ul,
+.addStudent-ul {
+  margin-left: 30%;
+}
+
+.inputBox {
+  display: block;
+  margin: 25px;
+  padding: 10px;
+  width: 308px;
+  border: 2px solid rgb(119, 170, 233);
+}
+
+.invalid-input {
+  color: red;
+  margin-top: -25px;
+  margin-left: 24px;
+  display: block;
+}
+
+.button-ul {
+  margin-left: 25px;
+  border: 2px solid black;
+  width: 195px;
+  padding: 10px;
+  background-color: rgb(119, 170, 233);
+  cursor: pointer;
+}
+
+/* ================= Dashboard ================= */
+.Students-List {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.Students-List .student-search-input {
+  padding: 10px;
+  width: 40%;
+  margin-bottom: 20px;
+  border: 2px solid rgb(119, 170, 233);
+  border-radius: 5px;
+}
+
+.Students-List table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 90%;
+  font-size: 16px;
+}
+
+.Students-List th,
+.Students-List td {
+  border: 1px solid rgb(119, 170, 233);
+  padding: 12px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Students-List th {
+  background-color: rgb(116, 174, 244);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Students-List td a {
+  color: #1a73e8;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Students-List td a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-button {
+  background-color: rgb(119, 170, 233);
+  color: black;
+  padding: 6px 12px;
+  border: 2px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.dashboard-button:hover {
+  background-color: #4f9bd7;
+}
+
+.no-students {
+  font-size: 18px;
+  color: #555;
+  padding: 20px;
+}
+
+/* ================= Footer ================= */
+.footer-ul {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  z-index: center;
+  background-color: rgb(119, 170, 233);
+}
+
+.footer-ul p {
+    text-align: center;
+    padding: 7px;
+    margin: 5px;
+}
+
+/* ================= Student Profile Page (Sidebar + Main Content) ================= */
+.student-profile-page {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark .student-profile-page {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.student-profile-layout {
+  display: flex;
+  height: calc(100vh - 60px);
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.sidebar-section {
+  width: 25%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  color: #000;
+  overflow-y: auto;
+}
+
+body.dark .sidebar-section {
+  background-color: #2e2e2e;
+  color: #fff;
+}
+
+.main-section {
+  width: 75%;
+  padding: 30px;
+  background-color: #ffffff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+body.dark .main-section {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.scrollable-content {
+  overflow-y: auto;
+  flex: 1;
+  max-height: calc(100vh - 120px);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================= Sidebar Info ================= */
+.student-avatar {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.student-avatar img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.skills-tags span {
+  display: inline-block;
+  background: #e0e0e0;
+  color: #333;
+  margin: 3px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+body.dark .skills-tags span {
+  background-color: #444;
+  color: #fff;
+}
+
+/* ================= Contest History ================= */
+.contest-history {
+  margin-top: 20px;
+}
+
+.filter {
+  margin-bottom: 10px;
+}
+
+.rating-graph {
+  height: 200px;
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+body.dark .rating-graph {
+  background-color: #2a2a2a;
+}
+
+.contest-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contest-list th,
+.contest-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+body.dark .contest-list th,
+body.dark .contest-list td {
+  background-color: #2e2e2e;
+  color: #fff;
+  border-color: #444;
+}
+
+/* ================= Problem Solving Stats ================= */
+.problem-solving-stats {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .problem-solving-stats {
+  background-color: #2e2e2e;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.problem-solving-stats h2,
+.problem-solving-stats h3,
+.problem-solving-stats label,
+.problem-solving-stats p {
+  transition: color 0.3s;
+}
+
+body.dark .problem-solving-stats h2,
+body.dark .problem-solving-stats h3,
+body.dark .problem-solving-stats label,
+body.dark .problem-solving-stats p {
+  color: #f0f0f0;
+}
+
+/* ================= Theme Toggle Button ================= */
+.theme-toggle-button {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dark .theme-toggle-button {
+  border-color: #fff;
+  color: #fff;
+}
+
+.dark .theme-toggle-button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ================= App Defaults ================= */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Optional: smooth theme transition */
+body,
+.student-profile-page,
+.card,
+.student-info,
+.student-sidebar {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

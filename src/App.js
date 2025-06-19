@@ -1,23 +1,84 @@
-import logo from './logo.svg';
 import './App.css';
+import Nav from './Components/Nav';
+import Footer from './Components/Footer';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Signup from './Components/Signup';
+import PrivateComponent from './Components/PrivateComponent';
+import Login from './Components/Login';
+import StudentTable from './Components/Dashboard';
+import StudentProfilePage from './Components/StudentProfile/StudentProfilePage';
+import AddStudent from './Components/AddStudent';
+import UpdateStudent from './Components/UpdateStudentDetails';
+import SyncSettings from './Components/SyncSettings';
+import { useState, useEffect } from 'react';
 
-function App() {
+// Toastify imports
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Extracted App content so we can use useLocation
+function AppContent({ toggleTheme, darkMode }) {
+  const location = useLocation();
+
+  // Check if the current route is a profile page
+    const showHeader = ['/', '/login', '/signup'].includes(location.pathname);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+      {/* Navbar */}
+      <Nav toggleTheme={toggleTheme} darkMode={darkMode} />
+
+      {/* Header only if not on profile page */}
+      {showHeader && (
+        <div className='header'>
+          <h2>Welcome to the Student Progress Manager</h2>
+        </div>
+      )}
+
+      {/* Routes */}
+      <Routes>
+        <Route element={<PrivateComponent />}>
+          <Route path="/dashboard" element={<StudentTable />} />
+          <Route path="/students/add" element={<AddStudent />} />
+          <Route path="/students/:id/profile" element={<StudentProfilePage />} />
+          <Route path="/sync-settings" element={<SyncSettings />} />
+          <Route path="/students/:id" element={<UpdateStudent />} />
+          <Route path="/logout" element={<h1>Logout Component</h1>} />
+        </Route>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+
+      {/*ToastContainer */}
+      <ToastContainer position="top-right" autoClose={3000} />
+
+      <Footer />
+    </>
+  );
+}
+
+// Theme State
+function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  const toggleTheme = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
+  };
+
+  useEffect(() => {
+    document.body.className = darkMode ? 'dark' : 'light';
+  }, [darkMode]);
+
+  return (
+    <div className={`App ${darkMode ? 'dark' : 'light'}`}>
+      <BrowserRouter>
+        <AppContent toggleTheme={toggleTheme} darkMode={darkMode} />
+      </BrowserRouter>
     </div>
   );
 }
