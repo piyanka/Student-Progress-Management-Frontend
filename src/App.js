@@ -10,6 +10,9 @@ import StudentProfilePage from './Components/StudentProfile/StudentProfilePage';
 import AddStudent from './Components/AddStudent';
 import UpdateStudent from './Components/UpdateStudentDetails';
 import SyncSettings from './Components/SyncSettings';
+import InactivityLogs from "./Components/InactivityLogs"; 
+
+
 import { useState, useEffect } from 'react';
 
 // Toastify imports
@@ -43,6 +46,7 @@ function AppContent({ toggleTheme, darkMode }) {
           <Route path="/students/:id/profile" element={<StudentProfilePage />} />
           <Route path="/sync-settings" element={<SyncSettings />} />
           <Route path="/students/:id" element={<UpdateStudent />} />
+          <Route path="/inactivity-logs" element={<InactivityLogs />} />
           <Route path="/logout" element={<h1>Logout Component</h1>} />
         </Route>
         <Route path="/" element={<Login />} />

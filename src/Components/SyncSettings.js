@@ -76,7 +76,7 @@ const SyncSettings = () => {
   };
 
   return (
-    <div className="login-ul">
+    <div className="login-ul sync-ul">
       <h2>Sync Settings</h2>
 
       {/* Frequency selector */}

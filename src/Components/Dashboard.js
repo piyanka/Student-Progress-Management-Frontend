@@ -15,23 +15,29 @@ import 'react-toastify/dist/ReactToastify.css';
 */
 const StudentList = () => {
     const [students, setStudents] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 6;
+
 
     // Fetch all students on component mount
     useEffect(() => {
-        getStudents();
-    }, []);
+        getStudents(page);
+    }, [page]);
 
     // Fetch student data from backend
 
     const getStudents = async () => {
         try {
-            let result = await fetch('http://localhost:5000/students', {
+            let result = await fetch(`http://localhost:5000/students?page=${page}&limit=${limit}`, {
                 headers: {
                     'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
                 }
             });
-            result = await result.json();
-            setStudents(result);
+            const data = await result.json();
+            setStudents(data.students || []);
+            setTotalPages(data.totalPages || 1);
+
         } catch (error) {
             console.error("Error fetching students:", error);
         }
@@ -49,7 +55,7 @@ const StudentList = () => {
             });
             result = await result.json();
             if (result) {
-                getStudents(); // Refresh list
+                getStudents(page); // Refresh list
             }
         } catch (err) {
             console.error("Failed to delete student:", err);
@@ -57,7 +63,7 @@ const StudentList = () => {
     };
 
     // Filter students by search input
-  
+
     const handleSearch = async (event) => {
         let key = event.target.value;
         if (key) {
@@ -66,17 +72,21 @@ const StudentList = () => {
                     'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
                 }
             });
-            result = await result.json();
-            if (result) {
-                setStudents(result);
+            const data = await result.json();
+
+
+            if (data) {
+                setStudents(data);
             }
+            setTotalPages(1); // search results = no pagination
+            setPage(1);
         } else {
             getStudents(); // Reset list if search is cleared
         }
     };
 
     // Download student list as CSV file
-  
+
     const downloadCSV = () => {
         const headers = ['Name', 'Email', 'Phone', 'Codeforces Handle', 'Current Rating', 'Max Rating', 'Last Synced'];
         const rows = students.map(student => [
@@ -111,9 +121,9 @@ const StudentList = () => {
 
     return (
         <div className='Students-List'>
-            <div>
+            {/* <div>
                 <h2>Student Dashboard</h2>
-            </div>
+            </div> */}
 
             {/* Search input */}
             <input
@@ -175,6 +185,24 @@ const StudentList = () => {
                 </tbody>
             </table>
 
+            {/* Pagination Controls */}
+            <div className="pagination-container">
+                <button
+                    className="pagination-button"
+                    disabled={page === 1}
+                    onClick={() => setPage(prev => prev - 1)}
+                >
+                    ⬅ Prev
+                </button>
+                <span className="pagination-info">Page {page} of {totalPages}</span>
+                <button
+                    className="pagination-button"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(prev => prev + 1)}
+                >
+                    Next ➡
+                </button>
+            </div>
             {/* CSV download button */}
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
                 <button className='dashboard-button' onClick={downloadCSV}>

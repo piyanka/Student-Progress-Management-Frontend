@@ -24,7 +24,7 @@ const StudentProfilePage = () => {
   const [student, setStudent] = useState(null);               // Student basic info
 
   //Fetch student details and Codeforces data on mount
- 
+
   useEffect(() => {
     const fetchStudentProfile = async () => {
       try {
@@ -76,9 +76,13 @@ const StudentProfilePage = () => {
               ratingHistory={cfData.ratingHistory}
               submissions={cfData.submissions}
             />
+          </div>
+
+          <div className="scrollable-content">
             <ProblemSolvingStats
               submissions={cfData.submissions}
             />
+
           </div>
         </div>
       </div>

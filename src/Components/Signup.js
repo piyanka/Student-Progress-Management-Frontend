@@ -48,7 +48,7 @@ const Signup = () => {
                 localStorage.setItem('token', JSON.stringify(result.auth));
                 navigate('/dashboard');
             } else {
-                alert("Signup failed. Please try again.");
+                alert(result.error || "Signup failed. Please try again.");
             }
         } catch (error) {
             console.error("Error during signup:", error);

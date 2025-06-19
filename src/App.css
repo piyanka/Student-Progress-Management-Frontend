@@ -2,15 +2,17 @@
 .header {
   text-align: center;
   margin-left: 123px;
+  margin-top: 77px;
 }
 
 /* ================= NavBar ================= */
-.nav-bar{
-  position:fixed;
+.nav-bar {
+  position: fixed;
   z-index: 1000;
   width: 100%;
-  top:0;
+  top: 0;
 }
+
 .nav-ul {
   padding: 5px;
   margin: 0px;
@@ -24,7 +26,7 @@
 
 .nav-right {
   text-align: right;
-  
+
 }
 
 .nav-ul li a {
@@ -54,6 +56,14 @@
 .login-ul,
 .addStudent-ul {
   margin-left: 30%;
+
+}
+
+.addStudent-ul {
+  margin-top: 75px;
+}
+.sync-ul {
+  margin-top: 78px;
 }
 
 .inputBox {
@@ -83,7 +93,7 @@
 /* ================= Dashboard ================= */
 .Students-List {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 89px;
 }
 
 .Students-List .student-search-input {
@@ -142,6 +152,45 @@
   padding: 20px;
 }
 
+/* Pagination container styling */
+.Students-List .pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Pagination buttons */
+.Students-List .pagination-button {
+  padding: 6px 14px;
+  border: 2px solid rgb(119, 170, 233);
+  background-color: white;
+  color: rgb(119, 170, 233);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.Students-List .pagination-button:hover {
+  background-color: rgb(119, 170, 233);
+  color: white;
+}
+
+.Students-List .pagination-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Pagination text (Page x of y) */
+.Students-List .pagination-info {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+
 /* ================= Footer ================= */
 .footer-ul {
   position: fixed;
@@ -154,9 +203,9 @@
 }
 
 .footer-ul p {
-    text-align: center;
-    padding: 7px;
-    margin: 5px;
+  text-align: center;
+  padding: 7px;
+  margin: 5px;
 }
 
 /* ================= Student Profile Page (Sidebar + Main Content) ================= */
@@ -177,6 +226,7 @@ body.dark .student-profile-page {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
   border-radius: 10px;
+  margin-top: 94px;
 }
 
 .sidebar-section {
@@ -342,6 +392,7 @@ body.dark .problem-solving-stats p {
   color: #000;
 }
 
+
 /* ================= App Defaults ================= */
 body.light {
   background-color: #ffffff;
@@ -361,3 +412,4 @@ body,
 .student-sidebar {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+

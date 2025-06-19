@@ -35,7 +35,7 @@ const Login = () => {
                 body: JSON.stringify({ email, password }),
                 headers: {
                     'Content-Type': 'application/json',
-                    'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+                    
                 },
             });
 
@@ -48,7 +48,7 @@ const Login = () => {
                 localStorage.setItem('token', JSON.stringify(result.auth));
                 navigate('/dashboard');
             } else {
-                alert('Please enter correct login details.');
+                alert(result.error || 'Please enter correct login details.');
             }
         } catch (error) {
             console.error('Login error:', error);
