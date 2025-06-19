@@ -193,7 +193,7 @@ The frontend will start on `http://localhost:3000` and connect to the backend at
 
 **Priyanka Kumari**
 Final Year, DTU – Fullstack & ML Enthusiast
-🔗 [LinkedIn](https://linkedin.com/in/priyanka-kumari) | 📧 [yadavpriyanka97181019@gmail.com](mailto:yadavpriyanka97181019@gmail.com)
+🔗 [LinkedIn]([https://linkedin.com/in/priyanka-yadav-3ab194243/]) | 📧 [yadavpriyanka97181019@gmail.com](mailto:yadavpriyanka97181019@gmail.com)
 
 ---
 
