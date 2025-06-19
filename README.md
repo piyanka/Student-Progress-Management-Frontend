@@ -172,8 +172,8 @@ The frontend will start on `http://localhost:3000` and connect to the backend at
 
 ## 📷 Demo & Submission
 
-* 🎥 **Video Demo:** [Link to video demo]([https://drive.google.com/file/d/1h3RGIblLL_JYHK6r64cie35slZhMHOPN/view?usp=sharing])
-* 🔗 **GitHub Repo:** [Link to repo]([https://github.com/piyanka/Student-Progress-Management-Backend])
+* 🎥 **Video Demo:** [Link to video demo](https://drive.google.com/file/d/1h3RGIblLL_JYHK6r64cie35slZhMHOPN/view?usp=sharing)
+* 🔗 **GitHub Repo:** [Link to repo](https://github.com/piyanka/Student-Progress-Management-Backend)
 
 > 💡 Tip: All interactions (add, sync, inactivity mail) are demonstrated in the demo video.
 
