@@ -172,7 +172,7 @@ The frontend will start on `http://localhost:3000` and connect to the backend at
 
 ## 📷 Demo & Submission
 
-* 🎥 **Video Demo:** [Link to video demo](https://your-demo-link.com)
+* 🎥 **Video Demo:** [Link to video demo]([https://drive.google.com/file/d/1h3RGIblLL_JYHK6r64cie35slZhMHOPN/view?usp=sharing])
 * 🔗 **GitHub Repo:** [https://github.com/your-username/student-progress-system](https://github.com/your-username/student-progress-system)
 
 > 💡 Tip: All interactions (add, sync, inactivity mail) are demonstrated in the demo video.
