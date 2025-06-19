@@ -1,8 +1,9 @@
 # 📚 Student Progress Management System
 
-A production-ready web application to manage, monitor, and analyze the competitive programming progress of students on Codeforces. Built with a modular and scalable architecture using the MERN stack.
+A web application to manage, monitor, and analyze the competitive programming progress of students on Codeforces. Built with a modular and scalable architecture using the MERN stack.
 
 ---
+![image](https://github.com/user-attachments/assets/d4b5ddce-e2ad-4a8a-9e68-dcd1342f7cc3)
 
 ## 🚀 Features
 
@@ -63,8 +64,6 @@ Split into two sections:
   * Option to disable auto-email for specific students
 
 ### 🌗 UI & UX
-
-* Responsive design for mobile and tablets 📱
 * Theme toggle between **Light 🌞** and **Dark 🌙** mode
 * User-friendly interface with toasts for feedback
 
@@ -93,16 +92,61 @@ Split into two sections:
 │   ├── student.js
 │   ├── codeforcesData.js
 │   └── syncConfig.js
-├── routes
-│   ├── studentRoutes.js
-│   ├── syncRoutes.js
-│   └── inactivityLogs.js
+|   └── inactivityLog.js
+|   └── user.js
+|   └── config.js
 ├── utils
 │   └── sendReminderEmail.js
-├── cron
+├── job
 │   └── startCodeforcesCron.js
-├── server.js
+├── index.js
 ```
+## 🧪 Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/student-progress-manager.git
+cd student-progress-manager
+```
+
+---
+
+### 2. Setup Backend
+
+```bash
+cd server
+npm install
+nodemon install 
+Add "start" : "nodemon index.js"
+```
+
+Create a `.env` file inside the `server/` directory with the following variables:
+
+```env
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password_or_app_password
+```
+
+Start the backend server:
+
+```bash
+npm start
+```
+
+---
+
+### 3. Setup Frontend
+
+```bash
+cd ../client
+npm install
+npm start
+```
+
+The frontend will start on `http://localhost:3000` and connect to the backend at `http://localhost:5000` by default.
 
 ---
 
@@ -125,7 +169,6 @@ Split into two sections:
 
 * `GET /inactivity-logs` - Paginated logs of reminder emails sent
 
----
 
 ## 📷 Demo & Submission
 
@@ -138,21 +181,13 @@ Split into two sections:
 
 ## 🧑‍💻 Developer Notes
 
-* All API calls are handled via Axios.
+* All API calls are handled via Axios, Fetch.
 * Realtime updates are handled via `window.location.reload()` (basic refresh strategy).
 * Pagination and filtering handled client-side with backend support.
 * Submission heatmap and bar graphs are created using Chart.js.
 
 ---
 
-## 🛡️ Future Improvements
-
-* Use WebSockets for live sync status
-* Add login roles (admin, student)
-* Notification system for users
-* Export reports (PDF / Excel)
-
----
 
 ## 👤 Author
 
