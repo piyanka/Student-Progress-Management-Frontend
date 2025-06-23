@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import LogoImg from './Assets.js/logo.png';
+import LogoImg from './Assets/logo.png';
 
 // Accept toggleTheme and darkMode props
 const Nav = ({ toggleTheme, darkMode }) => {
@@ -19,7 +19,7 @@ const Nav = ({ toggleTheme, darkMode }) => {
 
   const logout = () => {
     localStorage.clear();
-    navigate('/login');
+    // navigate('/');
   };
 
   return (
@@ -33,7 +33,7 @@ const Nav = ({ toggleTheme, darkMode }) => {
             <li><Link to="/students/add">Add Student</Link></li>
             <li><Link to="/sync-settings">Sync Settings</Link></li>
             <li><Link to="/inactivity-logs">Inactivity Logs</Link></li> {/* 🔗 New Link */}
-            <li><Link onClick={logout} to="/signup">Logout({userName})</Link></li>
+            <li><Link onClick={logout} to="/">Logout({userName})</Link></li>
 
             <li style={{ marginLeft: 'auto' }}>
               <button className="theme-toggle-button" onClick={toggleTheme}>
@@ -43,6 +43,7 @@ const Nav = ({ toggleTheme, darkMode }) => {
           </ul>
         ) : (
           <ul className="nav-ul nav-right">
+            
             <li><Link to="/signup">Signup</Link></li>
             <li><Link to="/login">Login</Link></li>
           </ul>

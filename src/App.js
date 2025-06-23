@@ -11,7 +11,7 @@ import AddStudent from './Components/AddStudent';
 import UpdateStudent from './Components/UpdateStudentDetails';
 import SyncSettings from './Components/SyncSettings';
 import InactivityLogs from "./Components/InactivityLogs"; 
-
+import HeroSection from "./Components/HeroSection";
 
 import { useState, useEffect } from 'react';
 
@@ -32,11 +32,11 @@ function AppContent({ toggleTheme, darkMode }) {
       <Nav toggleTheme={toggleTheme} darkMode={darkMode} />
 
       {/* Header only if not on profile page */}
-      {showHeader && (
+      {/* {showHeader && (
         <div className='header'>
           <h2>Welcome to the Student Progress Manager</h2>
         </div>
-      )}
+      )} */}
 
       {/* Routes */}
       <Routes>
@@ -49,7 +49,7 @@ function AppContent({ toggleTheme, darkMode }) {
           <Route path="/inactivity-logs" element={<InactivityLogs />} />
           <Route path="/logout" element={<h1>Logout Component</h1>} />
         </Route>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HeroSection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

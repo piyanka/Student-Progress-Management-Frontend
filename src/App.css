@@ -43,6 +43,95 @@
   margin-left: 7px;
 }
 
+/* ================= Hero Section ================= */
+.hero-container {
+  background: linear-gradient(to bottom right, #e0f2ff, #f0f9ff);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  margin-top: 54px;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+  margin-right: 20px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1d4ed8;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #2563eb;
+}
+
+.secondary-btn {
+  background-color: white;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+.secondary-btn:hover {
+  background-color: #dbeafe;
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+
 /* ================= Search Bar ================= */
 .search-ul {
   width: 490px;
@@ -59,9 +148,16 @@
 
 }
 
+.register-ul,
+.login-ul {
+  margin-top: 70px;
+
+}
+
 .addStudent-ul {
   margin-top: 75px;
 }
+
 .sync-ul {
   margin-top: 78px;
 }
@@ -412,4 +508,3 @@ body,
 .student-sidebar {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
