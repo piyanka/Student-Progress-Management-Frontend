@@ -1,70 +1,200 @@
-# Getting Started with Create React App
+# 📚 Student Progress Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application to manage, monitor, and analyze the competitive programming progress of students on Codeforces. Built with a modular and scalable architecture using the MERN stack.
 
-## Available Scripts
+---
+![image](https://github.com/user-attachments/assets/d4b5ddce-e2ad-4a8a-9e68-dcd1342f7cc3)
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+### ✅ Student Table View
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Displays all enrolled students in a tabular format.
+* Fields: **Name, Email, Phone, Codeforces Handle, Current Rating, Max Rating, Last Synced**.
+* Options to:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  * ➕ Add new student
+  * ✏️ Edit student details
+  * 🗑️ Delete student
+  * 📥 Download student list as CSV
+  * 🔍 View detailed Codeforces profile
 
-### `npm test`
+### ✅ Student Profile View
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Split into two sections:
 
-### `npm run build`
+#### 📈 Contest History
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Filters: 30 / 90 / 365 days
+* Graph of rating over time
+* Table listing contests with:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  * Contest name
+  * Rating change
+  * Rank
+  * Unsolved problems (still unsolved today)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 🧠 Problem Solving Stats
 
-### `npm run eject`
+* Filters: 7 / 30 / 90 days
+* Shows:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  * Most difficult problem solved
+  * Total problems solved
+  * Average problem rating
+  * Problems solved per day (avg)
+  * 📊 Bar chart of solved problems by rating bucket
+  * 🔥 Submission heatmap
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🔄 Codeforces Data Sync
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* ⚙️ Automatically syncs every day at a configurable time (default: 2 AM)
+* Admin can change sync **time** and **frequency** (daily, weekly, monthly)
+* If a student's **Codeforces handle is updated**, data is re-fetched instantly
+* Each student row shows when data was **last synced**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🔔 Inactivity Detection
 
-## Learn More
+* After every sync:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  * Detect students with **no submissions in last 7 days**
+  * 🚨 Send automatic reminder email
+  * Log email sent date, reason, and count per student
+  * Admin can view **email logs** in a separate UI
+  * Option to disable auto-email for specific students
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🌗 UI & UX
+* Theme toggle between **Light 🌞** and **Dark 🌙** mode
+* User-friendly interface with toasts for feedback
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🛠️ Tech Stack
 
-### Analyzing the Bundle Size
+| Layer                  | Tech                    |
+| ---------------------- | ----------------------- |
+| Frontend               | React.js, CSS, Chart.js |
+| Backend                | Node.js, Express.js     |
+| Database               | MongoDB                 |
+| Authentication         | JWT                     |
+| Codeforces Integration | Official CF APIs        |
+| Email                  | Nodemailer              |
+| Cron Jobs              | node-cron               |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📦 Folder Structure (Server)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+├── controllers
+│   └── codeforcesController.js
+├── db
+│   ├── student.js
+│   ├── codeforcesData.js
+│   └── syncConfig.js
+|   └── inactivityLog.js
+|   └── user.js
+|   └── config.js
+├── utils
+│   └── sendReminderEmail.js
+├── job
+│   └── startCodeforcesCron.js
+├── index.js
+```
+## 🧪 Installation & Setup
 
-### Advanced Configuration
+### 1. Clone the Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+git clone https://github.com/yourusername/student-progress-manager.git
+cd student-progress-manager
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 2. Setup Backend
 
-### `npm run build` fails to minify
+```bash
+cd server
+npm install
+nodemon install 
+Add "start" : "nodemon index.js"
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Create a `.env` file inside the `server/` directory with the following variables:
+
+```env
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password_or_app_password
+```
+
+Start the backend server:
+
+```bash
+npm start
+```
+
+---
+
+### 3. Setup Frontend
+
+```bash
+cd ../client
+npm install
+npm start
+```
+
+The frontend will start on `http://localhost:3000` and connect to the backend at `http://localhost:5000` by default.
+
+---
+
+## 🧪 API Endpoints (Protected via JWT)
+
+### 🔹 Student APIs
+
+* `GET /students?page=1&limit=6` - Paginated student list
+* `POST /students` - Add student
+* `PUT /students/:id` - Update student
+* `DELETE /students/:id` - Delete student
+
+### 🔹 Codeforces APIs
+
+* `GET /sync/:studentId` - Manually trigger sync for student
+* `POST /sync/config` - Update sync frequency/time
+* `GET /sync/config` - Get current config
+
+### 🔹 Inactivity APIs
+
+* `GET /inactivity-logs` - Paginated logs of reminder emails sent
+
+
+## 📷 Demo & Submission
+
+* 🎥 **Video Demo:** [Link to video demo](https://drive.google.com/file/d/1h3RGIblLL_JYHK6r64cie35slZhMHOPN/view?usp=sharing)
+* 🔗 **GitHub Repo:** [Link to repo](https://github.com/piyanka/Student-Progress-Management-Backend)
+
+> 💡 Tip: All interactions (add, sync, inactivity mail) are demonstrated in the demo video.
+
+---
+
+## 🧑‍💻 Developer Notes
+
+* All API calls are handled via Axios, Fetch.
+* Realtime updates are handled via `window.location.reload()` (basic refresh strategy).
+* Pagination and filtering handled client-side with backend support.
+* Submission heatmap and bar graphs are created using Chart.js.
+
+---
+
+
+## 👤 Author
+
+**Priyanka Kumari**
+Final Year, DTU – Fullstack & ML Enthusiast
+🔗 [LinkedIn]([https://linkedin.com/in/priyanka-yadav-3ab194243/]) | 📧 [yadavpriyanka97181019@gmail.com](mailto:yadavpriyanka97181019@gmail.com)
+
+---
+
+> 🧩 Built with care to manage students, encourage practice, and track growth effectively.
