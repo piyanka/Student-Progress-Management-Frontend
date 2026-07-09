@@ -13,18 +13,18 @@ const HeroSection = () => {
           <p>
             Track Codeforces progress, analyze problem-solving trends, and keep your students engaged — all from one simple dashboard.
           </p>
-          <div className="hero-buttons">
-            {/* <Link to="/signup">
+          {/* <div className="hero-buttons">
+            <Link to="/signup">
               <button className="primary-btn">🚀 Get Started</button>
-            </Link> */}
-            {/* <a
-              href="https://github.com/your-repo-link"
+            </Link>
+            <a
+              href="https://github.com/piyanka/Student-Progress-Management-Frontend"
               target="_blank"
               rel="noopener noreferrer"
             >
               <button className="secondary-btn">⭐ GitHub Repo</button>
-            </a> */}
-          </div>
+            </a>
+          </div> */}
         </div>
 
         {/* Right Image Section */}

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 /** AddStudent Component
 
- * This component provides a form for adding new student details into the system.
- * It collects name, email, phone number, Codeforces handle, and ratings,
- * validates the input, and makes a POST request to the backend API to store the student.
+ This component provides a form for adding new student details into the system.
+ It collects name, email, phone number, Codeforces handle, and ratings,
+ validates the input, and makes a POST request to the backend API to store the student.
 
 */
 const AddStudent = () => {
@@ -18,8 +18,8 @@ const AddStudent = () => {
     const [error, setError] = useState(false); // Controls validation message visibility
 
     /**
-     * Handles the student creation logic
-     * Validates inputs and sends a POST request to the backend API
+     Handles the student creation logic
+     Validates inputs and sends a POST request to the backend API
      */
     const handleAddStudent = async () => {
         // Input validation: show errors if any field is empty

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 /** Login Component
  
- * Renders a login form that authenticates existing users.
- * If the user is already authenticated, redirects to the dashboard.
- * On successful login, stores user and token in localStorage.
+ Renders a login form that authenticates existing users.
+ If the user is already authenticated, redirects to the dashboard.
+ On successful login, stores user and token in localStorage.
 
 */
  
@@ -25,8 +25,8 @@ const Login = () => {
     }, [navigate]);
 
     /**
-     * Handles login process.
-     * Sends credentials to backend and stores auth token + user info on success.
+     Handles login process.
+     Sends credentials to backend and stores auth token + user info on success.
      */
     const handleLogin = async () => {
         try {

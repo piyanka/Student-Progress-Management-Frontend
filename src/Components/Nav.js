@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import LogoImg from './Assets/logo.png';
 
 // Accept toggleTheme and darkMode props
 const Nav = ({ toggleTheme, darkMode }) => {
   const auth = localStorage.getItem('user');
-  const navigate = useNavigate();
+  
 
   let userName = '';
 
@@ -19,7 +19,6 @@ const Nav = ({ toggleTheme, darkMode }) => {
 
   const logout = () => {
     localStorage.clear();
-    // navigate('/');
   };
 
   return (

@@ -9,15 +9,16 @@ import ProblemSolvingStats from "./ProblemSolvingStats";
 
 /** StudentProfilePage 
 
- * This component displays a detailed profile page for a single student.
- * It fetches:
- * - Basic student info (name, email, handle, etc.)
- * - Codeforces data: rating history & submissions
- * And renders:
- * - Sidebar with student details and last sync time
- * - Main section with Contest History and Problem Solving Stats
+ This component displays a detailed profile page for a single student.
+  It fetches:
+  - Basic student info (name, email, handle, etc.)
+  - Codeforces data: rating history & submissions
+  And renders:
+  - Sidebar with student details and last sync time
+  - Main section with Contest History and Problem Solving Stats
  
  */
+
 const StudentProfilePage = () => {
   const { id } = useParams();                                 // Student ID from URL
   const [cfData, setCfData] = useState(null);                 // Codeforces data

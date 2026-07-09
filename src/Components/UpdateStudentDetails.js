@@ -83,7 +83,7 @@ const UpdateStudent = () => {
 
       if (response.ok) {
         alert("Student updated successfully.");
-        navigate('/');
+        navigate('/dashboard');
       } else {
         alert(result?.error || "Update failed");
       }

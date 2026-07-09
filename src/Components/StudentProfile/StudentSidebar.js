@@ -4,19 +4,19 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 /** StudentSidebar Component
- *
- * Displays basic student information alongside Codeforces profile stats.
- * Props:
- * - student: basic student details (name, email, phone)
- * - info: Codeforces user info (handle, avatar, rating, rank, etc.)
- * - lastSynced: timestamp of last CF data sync
- *
- * Features:
- * - Shows user avatar, name, handle, and contact info
- * - Displays Codeforces statistics
- * - Shows last sync time
- * - Allows manual sync with a button (disabled if synced within 10 minutes)
- * - Shows toast notifications for sync status
+ 
+  Displays basic student information alongside Codeforces profile stats.
+  Props:
+  - student: basic student details (name, email, phone)
+  - info: Codeforces user info (handle, avatar, rating, rank, etc.)
+  - lastSynced: timestamp of last CF data sync
+ 
+  Features:
+  - Shows user avatar, name, handle, and contact info
+  - Displays Codeforces statistics
+  - Shows last sync time
+  - Allows manual sync with a button (disabled if synced within 10 minutes)
+  - Shows toast notifications for sync status
  */
 const StudentSidebar = ({ student, info, lastSynced }) => {
   const [syncing, setSyncing] = useState(false);

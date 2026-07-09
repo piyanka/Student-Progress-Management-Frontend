@@ -27,8 +27,8 @@ const Signup = () => {
     }, [navigate]);
 
     /**
-     * Handles the signup process by sending a POST request to the backend
-     * Stores user and token in localStorage on successful registration
+     Handles the signup process by sending a POST request to the backend
+     Stores user and token in localStorage on successful registration
      */
     const collectData = async () => {
         try {

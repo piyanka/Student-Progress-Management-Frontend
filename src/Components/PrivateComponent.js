@@ -3,10 +3,10 @@ import { useNavigate, Outlet } from 'react-router-dom';
 
 /** PrivateComponent
 
- * This is a protected route wrapper.
- * It checks whether a user is authenticated.
- * If yes, it renders the nested routes (using <Outlet />).
- * If not, it redirects the user to the login page.
+ This is a protected route wrapper.
+ It checks whether a user is authenticated.
+ If yes, it renders the nested routes (using <Outlet />).
+ If not, it redirects the user to the login page.
 
 */
 const PrivateComponent = () => {
