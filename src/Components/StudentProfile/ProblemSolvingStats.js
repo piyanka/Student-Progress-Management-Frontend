@@ -16,16 +16,16 @@ import {BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer
  */
 const ProblemSolvingStats = ({ submissions }) => {
   const [filterDays, setFilterDays] = useState(30);                             // Filter state
-  const now = new Date();
+  const today = useMemo(() => new Date(), []);
 
   // Filter submissions based on selected timeframe (7/30/90 days)
 
   const filteredSubmissions = useMemo(() => {
-    const cutoff = subDays(now, filterDays).getTime();
+    const cutoff = subDays(today, filterDays).getTime();
     return submissions.filter(
       (s) => s.creationTimeSeconds * 1000 >= cutoff
     );
-  }, [submissions, filterDays]);
+  }, [submissions, filterDays, today]);
 
   // Identify unique solved problems by contestId + index
 
@@ -33,7 +33,7 @@ const ProblemSolvingStats = ({ submissions }) => {
     const map = new Map();
     filteredSubmissions.forEach((sub) => {
       if (sub.verdict === "OK" && sub.problem) {
-        const key = `${sub.problem.contestId}-${sub.problem.index}`;
+        const key = `${sub.contestId}-${sub.problem.index}`;
         if (!map.has(key)) {
           map.set(key, sub.problem.rating || 0);
         }

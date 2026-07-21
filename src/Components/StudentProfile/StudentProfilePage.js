@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { apiRequest } from "../../utils/api";
 
 // Custom sub-components
 import StudentSidebar from "./StudentSidebar";
@@ -23,32 +23,29 @@ const StudentProfilePage = () => {
   const { id } = useParams();                                 // Student ID from URL
   const [cfData, setCfData] = useState(null);                 // Codeforces data
   const [student, setStudent] = useState(null);               // Student basic info
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   //Fetch student details and Codeforces data on mount
 
   useEffect(() => {
     const fetchStudentProfile = async () => {
       try {
-        console.log("Fetching for studentId:", id);
+        setLoading(true);
+        setError("");
 
-        // Fetch Codeforces performance data
-        const cfRes = await axios.get(`http://localhost:5000/students/${id}/codeforces`, {
-          headers: {
-            'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-          }
-        });
+        const [cfDataRes, studentRes] = await Promise.all([
+          apiRequest(`/students/${id}/codeforces`),
+          apiRequest(`/students/${id}`)
+        ]);
 
-        // Fetch student personal info
-        const studentRes = await axios.get(`http://localhost:5000/students/${id}`, {
-          headers: {
-            'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-          }
-        });
-
-        setCfData(cfRes.data);
-        setStudent(studentRes.data);
+        setCfData(cfDataRes);
+        setStudent(studentRes);
       } catch (err) {
         console.error("Error fetching student profile:", err);
+        setError(err.message || "Failed to load student profile");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,6 +53,8 @@ const StudentProfilePage = () => {
   }, [id]);
 
   // Show loading state until data is fetched
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div style={{ padding: "1rem", color: "crimson" }}>{error}</div>;
   if (!cfData || !student) return <div>Loading...</div>;
 
   return (

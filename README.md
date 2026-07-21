@@ -148,6 +148,12 @@ npm start
 
 The frontend will start on `http://localhost:3000` and connect to the backend at `http://localhost:5000` by default.
 
+If you want to point the frontend at a different backend, create `Frontend/.env` with:
+
+```env
+REACT_APP_API_BASE_URL=http://localhost:5000
+```
+
 ---
 
 ## 🧪 API Endpoints (Protected via JWT)
@@ -162,8 +168,9 @@ The frontend will start on `http://localhost:3000` and connect to the backend at
 ### 🔹 Codeforces APIs
 
 * `GET /sync/:studentId` - Manually trigger sync for student
-* `POST /sync/config` - Update sync frequency/time
-* `GET /sync/config` - Get current config
+* `POST /sync-config` - Update sync frequency/time
+* `GET /sync-config` - Get current config
+* `GET /health` - Check backend and API status
 
 ### 🔹 Inactivity APIs
 

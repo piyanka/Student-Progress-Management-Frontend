@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiRequest } from '../utils/api';
 
 /** AddStudent Component
 
@@ -41,26 +42,18 @@ const AddStudent = () => {
         const userId = JSON.parse(user)._id;
 
         try {
-            // POST request to backend to add a student
-            const response = await fetch('http://localhost:5000/students/add', {
+            await apiRequest('/students/add', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': `Bearer ${JSON.parse(token)}`
-                },
-                body: JSON.stringify({
+                body: {
                     name,
                     email,
                     phone,
                     cfHandle,
-                    currentRating,
-                    maxRating,
+                    currentRating: Number(currentRating),
+                    maxRating: Number(maxRating),
                     userId
-                })
+                }
             });
-
-            const data = await response.json();
-            console.log("Student added:", data);
 
             // Clear the form after successful submission
             setName('');

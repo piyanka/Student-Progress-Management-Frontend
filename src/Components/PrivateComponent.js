@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 /** PrivateComponent
 
@@ -11,10 +11,9 @@ import { useNavigate, Outlet } from 'react-router-dom';
 */
 const PrivateComponent = () => {
     const auth = localStorage.getItem('user');  // Check if user data exists in localStorage
-    const navigate = useNavigate();             
 
     // If authenticated, allow access to child routes. Else, redirect to login.
-    return auth ? <Outlet /> : navigate("/login");
+    return auth ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default PrivateComponent;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiRequest } from '../utils/api';
 
 /** Login Component
  
@@ -30,17 +31,11 @@ const Login = () => {
      */
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const result = await apiRequest('/login', {
                 method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    
-                },
+                body: { email, password },
+                auth: false,
             });
-
-            const result = await response.json();
-            console.log(result);
 
             // If authentication is successful
             if (result && result.auth) {

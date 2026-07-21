@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { apiRequest } from "../../utils/api";
 
 /** StudentSidebar Component
  
@@ -31,11 +31,7 @@ const StudentSidebar = ({ student, info, lastSynced }) => {
     try {
       setSyncing(true);
 
-      await axios.get(`http://localhost:5000/sync/${student._id}`, {
-        headers: {
-          authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
-      });
+      await apiRequest(`/sync/${student._id}`);
 
       toast.update(toastId, {
         render: "✅ Codeforces data synced successfully!",

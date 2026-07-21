@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { apiRequest } from '../utils/api';
 
 /** UpdateStudent Component
 
@@ -28,27 +29,15 @@ const UpdateStudent = () => {
   useEffect(() => {
     const getStudentDetails = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/students/${params.id}`, {
-          headers: {
-            'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-          }
-        });
+        const result = await apiRequest(`/students/${params.id}`);
 
-        const result = await res.json();
-
-        if (res.ok) {
-          
-          // Populate form fields with fetched data
-          setName(result.name);
-          setEmail(result.email);
-          setPhone(result.phone);
-          setCfHandle(result.cfHandle);
-          setCurrentRating(result.currentRating);
-          setMaxRating(result.maxRating);
-        } else {
-          console.error(result);
-          alert("Failed to load student");
-        }
+        // Populate form fields with fetched data
+        setName(result.name);
+        setEmail(result.email);
+        setPhone(result.phone);
+        setCfHandle(result.cfHandle);
+        setCurrentRating(result.currentRating);
+        setMaxRating(result.maxRating);
       } catch (err) {
         console.error("Error fetching student:", err);
       }
@@ -63,29 +52,21 @@ const UpdateStudent = () => {
    */
   const handleUpdateStudent = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/students/${params.id}`, {
+      const result = await apiRequest(`/students/${params.id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-        },
-        body: JSON.stringify({
+        body: {
           name,
           email,
           phone,
           cfHandle,
-          currentRating,
-          maxRating,
-        }),
+          currentRating: Number(currentRating),
+          maxRating: Number(maxRating),
+        },
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
+      if (result) {
         alert("Student updated successfully.");
         navigate('/dashboard');
-      } else {
-        alert(result?.error || "Update failed");
       }
     } catch (error) {
       console.error("Error updating student:", error);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { apiRequest } from "../utils/api";
 
 /**
  * InactivityLogs Component
@@ -23,18 +23,11 @@ const InactivityLogs = () => {
   // Fetch logs from backend API with pagination
   const fetchLogs = async (pageNumber = 1) => {
     try {
-      const res = await axios.get(
-        `http://localhost:5000/inactivity-logs?page=${pageNumber}&limit=6`,
-        {
-          headers: {
-            authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-          },
-        }
-      );
+      const data = await apiRequest(`/inactivity-logs?page=${pageNumber}&limit=6`);
 
-      setLogs(res.data.logs);
-      setPage(res.data.page);
-      setTotalPages(res.data.totalPages);
+      setLogs(data.logs || []);
+      setPage(data.page || 1);
+      setTotalPages(data.totalPages || 1);
     } catch (err) {
       console.error("Failed to fetch logs:", err.message);
     }

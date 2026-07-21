@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import HeroImg from "./Assets/hero-illustration.svg"; // Replace with your actual SVG path
 
 

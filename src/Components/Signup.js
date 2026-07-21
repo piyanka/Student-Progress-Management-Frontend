@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiRequest } from '../utils/api';
 
 /** Signup Component
 
@@ -32,15 +33,11 @@ const Signup = () => {
      */
     const collectData = async () => {
         try {
-            const response = await fetch('http://localhost:5000/register', {
+            const result = await apiRequest('/register', {
                 method: "POST",
-                body: JSON.stringify({ name, email, password }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                body: { name, email, password },
+                auth: false,
             });
-
-            const result = await response.json();
 
             // On successful response, store data and navigate to dashboard
             if (result && result.result) {

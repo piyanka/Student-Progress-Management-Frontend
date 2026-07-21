@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiRequest } from '../utils/api';
 
 /** SyncSettings Component
  
@@ -18,13 +19,8 @@ const SyncSettings = () => {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const res = await fetch('http://localhost:5000/sync-config', {
-          headers: {
-            'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-          }
-        });
-        const result = await res.json();
-        if (result.config) {
+        const result = await apiRequest('/sync-config');
+        if (result?.config) {
           setFrequency(result.config.frequency);
           setTime(result.config.time);
         }
@@ -53,16 +49,10 @@ const SyncSettings = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/sync-config', {
+      const result = await apiRequest('/sync-config', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-        },
-        body: JSON.stringify({ frequency, time }),
+        body: { frequency, time },
       });
-
-      const result = await res.json();
 
       if (result.success) {
         setStatus('✅ Sync settings updated successfully.');

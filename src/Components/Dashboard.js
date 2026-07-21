@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiRequest } from "../utils/api";
 
 // Toast notifications
 import { toast } from "react-toastify";
@@ -17,79 +18,63 @@ const Dashboard = () => {
   const [students, setStudents] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const limit = 6;
 
-  // Fetch all students on component mount
+  // Fetch students and search results with a small debounce for search input.
   useEffect(() => {
-    getStudents(page);
-  }, [page]);
+    let cancelled = false;
+    const timeout = setTimeout(async () => {
+      setLoading(true);
+      setError("");
 
-  // Fetch student data from backend
+      try {
+        if (searchTerm.trim()) {
+          const data = await apiRequest(`/students/search/${encodeURIComponent(searchTerm.trim())}`);
+          if (!cancelled) {
+            setStudents(Array.isArray(data) ? data : []);
+            setTotalPages(1);
+          }
+        } else {
+          const data = await apiRequest(`/students?page=${page}&limit=${limit}`);
+          if (!cancelled) {
+            setStudents(data.students || []);
+            setTotalPages(data.totalPages || 1);
+          }
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || "Error fetching students");
+          setStudents([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }, searchTerm.trim() ? 300 : 0);
 
-  const getStudents = async (page) => {
-    try {
-      let result = await fetch(
-        `http://localhost:5000/students?page=${page}&limit=${limit}`,
-        {
-          headers: {
-            authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-          },
-        },
-      );
-      const data = await result.json();
-      setStudents(data.students || []);
-      setTotalPages(data.totalPages || 1);
-    } catch (error) {
-      console.error("Error fetching students:", error);
-    }
-  };
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [page, searchTerm]);
 
   //Delete a student by ID(Student ID)
 
   const deleteStudent = async (id) => {
     try {
-      let result = await fetch(`http://localhost:5000/students/${id}`, {
+      const result = await apiRequest(`/students/${id}`, {
         method: "DELETE",
-        headers: {
-          authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
       });
-      result = await result.json();
       if (result.success) {
-        getStudents(page); // Refresh list
+        setSearchTerm("");
+        setPage(1);
       }
     } catch (err) {
       console.error("Failed to delete student:", err);
-    }
-  };
-
-  // Filter students by search input
-
-  const handleSearch = async (event) => {
-    try {
-      let key = event.target.value;
-
-      if (key) {
-        let result = await fetch(
-          `http://localhost:5000/students/search/${key}`,
-          {
-            headers: {
-              authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-            },
-          },
-        );
-        const data = await result.json();
-
-        if (data) {
-          setStudents(data);
-        }
-        setTotalPages(1); // search results = no pagination
-        setPage(1);
-      } else {
-        getStudents(); // Reset list if search is cleared
-      }
-    } catch (error) {
-      console.error("Search Error:", error);
     }
   };
 
@@ -143,10 +128,17 @@ const Dashboard = () => {
       {/* Search input */}
       <input
         className="student-search-input"
-        onChange={handleSearch}
+        value={searchTerm}
+        onChange={(event) => {
+          setSearchTerm(event.target.value);
+          setPage(1);
+        }}
         type="text"
         placeholder="🔍 Search by name, email, handle, or phone"
       />
+
+      {loading && <p style={{ marginTop: "1rem" }}>Loading students...</p>}
+      {error && !loading && <p style={{ marginTop: "1rem", color: "crimson" }}>{error}</p>}
 
       {/* Student table */}
       <table className="student-table">
@@ -203,7 +195,7 @@ const Dashboard = () => {
           ) : (
             <tr>
               <td colSpan="10" style={{ textAlign: "center" }}>
-                No Students Found
+                {loading ? "Loading..." : "No Students Found"}
               </td>
             </tr>
           )}
